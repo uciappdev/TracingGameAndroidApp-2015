@@ -2,8 +2,10 @@ package com.game.uciappdev.thepointthing;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -13,7 +15,6 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -36,4 +37,23 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    // Click handlers for buttons on main menu screen
+
+    public void moveToPlayState(View v){
+        Log.v("MainActivity", "Moving to Play State!");
+    }
+
+    public void moveToInstState(View v){
+        Log.v("Main Activity", "Moving to Inst State");
+    }
+
+    public void moveToOptionsState(View v){
+        Log.v("Main Activity", "Moving to Option State");
+    }
+
+    public void exitApp(View v){
+        System.exit(0);
+    }
+
 }
