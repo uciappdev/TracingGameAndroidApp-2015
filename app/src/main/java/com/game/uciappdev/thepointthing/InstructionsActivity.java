@@ -1,5 +1,6 @@
 package com.game.uciappdev.thepointthing;
 
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -8,10 +9,20 @@ import android.view.MenuItem;
 
 public class InstructionsActivity extends ActionBarActivity {
 
+    InstructionsPagerAdapter mInstructionPageAdapter;
+    ViewPager mViewPager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_instructions);
+        setContentView(R.layout.instructions);
+
+        //View Pager ands its adapters use support library
+        //fragments, so use getSupportFragmentManager
+        mInstructionPageAdapter = new InstructionsPagerAdapter(getSupportFragmentManager(), this);
+        mViewPager =(ViewPager)findViewById(R.id.instructions_pager);
+        mViewPager.setAdapter(mInstructionPageAdapter);
+
     }
 
 
