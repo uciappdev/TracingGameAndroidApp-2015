@@ -1,19 +1,34 @@
 package com.game.uciappdev.thepointthing;
 
+import android.content.Intent;
+import android.os.SystemClock;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.content.Intent;
 import android.view.View;
+import android.widget.Chronometer;
 
 
-public class MainActivity extends ActionBarActivity {
+public class GameScreenActivity extends ActionBarActivity {
+
+    Chronometer chronometer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.game_screen);
+        chronometer = (Chronometer) findViewById(R.id.Timer);
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        chronometer.start();
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_home_button, menu);
+        return true;
     }
 
     @Override
@@ -32,9 +47,10 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
+
     // Called when user clicks home button.
     public void goHome(View view){
-        Intent intent = new Intent(this, GameScreenActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 }
