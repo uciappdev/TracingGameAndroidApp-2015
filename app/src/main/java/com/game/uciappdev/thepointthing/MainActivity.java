@@ -54,7 +54,8 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void moveToOptionsState(View v){
-        Log.v("Main Activity", "Moving to Option State");
+        Intent i = new Intent(this, OptionsActivity.class);
+        startActivity(i);
     }
 
     public void exitApp(View v){
