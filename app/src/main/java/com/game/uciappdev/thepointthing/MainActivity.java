@@ -42,7 +42,7 @@ public class MainActivity extends ActionBarActivity {
     // Click handlers for buttons on main menu screen
 
     public void moveToPlayState(View v){
-        Intent i = new Intent(this, GameStateActivity.class);
+        Intent i = new Intent(this, Level_Select.class);
         Log.v("MainActivity", "Moving to Play State!");
         startActivity(i);
     }
