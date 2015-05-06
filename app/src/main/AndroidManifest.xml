@@ -30,7 +30,16 @@
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.game.uciappdev.thepointthing.MainActivity" /> >
+                android:value="com.game.uciappdev.thepointthing.MainActivity" />
+ >
+        </activity>
+        <activity
+            android:name=".OptionsActivity"
+            android:label="@string/title_activity_options"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.game.uciappdev.thepointthing.MainActivity" />
         </activity>
     </application>
 
