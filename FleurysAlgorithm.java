@@ -17,23 +17,49 @@ public class FleurysAlgorithm{
         System.out.println(intersection);
     }
 
-    public FleurysAlgorithm(int n){
-        this.size = n;
+    public FleurysAlgorithm(int size){
+        this.size = size;
         this.vlist = new ArrayList<Vertex>();
         this.elist = new ArrayList<Edge>();
         this.randomGenerator = new Random();
 
-        // create all vertices. each vertex keeps count of visits.
-        for (int x = 0; x < n; x++){
-            for (int y = 0; y < n; y++){
-                Vertex coord = new Vertex(x, y);
-                vlist.add(coord);
-            }
-        }
+        buildGrid(this.size);
+        generatePath();
     }
 
     // remove static from all of the following after debugging 
+    public static void buildGrid(int size){
+        // create all vertices.
+        for (int x = 0; x < size; x++){
+            for (int y = 0; y < size; y++){
+                Vertex coord = new Vertex(x, y);
+                this.vlist.add(coord);
+            }
+        }      
+    }
 
+    public void generate(){
+        for (int i=0; i < this.vlist.size(); i++){
+
+            Vertex start = this.vlist.get(i);
+            
+            while (currentStart.getDegree() < 2){
+                int r = this.randomGenerator.nextInt(size);
+                Vertex currentEnd = this.vlist.get(r);
+                Edge potentialEdge = new Edge(currentStart, currentEnd);
+
+                if (currentEnd.getDegree() < 2) || (currentStart == currentEnd) || !(intersectsAnyEdge(potentialEdge))){
+                    continue; // and try a different currentEnd.
+                }
+
+                currentStart.visit();
+                currentEnd.visit();
+                this.elist.add(potentialEdge);
+                }
+            }
+        }
+    }
+    
     public static boolean intersects(Edge a, Edge b){
         int ax1 = a.getStart().getX(),
             ay1 = a.getStart().getY(),
@@ -44,49 +70,31 @@ public class FleurysAlgorithm{
             bx2 = b.getEnd().getX(),
             by2 = b.getEnd().getY();
 
-        
-
         int aSlope = (ay1 - ay2) / (ax1 - ax2);  // slope
         int aLeftAxisIntersect = ay1 - aSlope*ax1;  // y = mx + b, b = mx + y
 
         int bSlope = (by1 - by2) / (bx1 - bx2);  
         int bLeftAxisIntersect = by1 - bSlope*bx1;
-        System.out.println(aSlope);
-        System.out.println(aLeftAxisIntersect);
-        System.out.println(bSlope);
-        System.out.println(bLeftAxisIntersect);
 
         double xIntercept = (aLeftAxisIntersect-bLeftAxisIntersect) / (bSlope-aSlope);
         // whether you use the slopes and y axis intercept of edge a or b does not matter
         double yIntercept = aSlope*(xIntercept) - aLeftAxisIntersect;
-        System.out.println(xIntercept);
-        System.out.println(yIntercept);
-
 
         return ((ax1 < xIntercept && xIntercept < ax2 && bx2 < xIntercept && xIntercept < bx1) &&
-                 (by2 < yIntercept && yIntercept < by1 && ay2 < yIntercept && yIntercept < ay1));
+                (by1 < yIntercept && yIntercept < by2 && ay1 < yIntercept && yIntercept < ay2));
     }
 
-
-    public void generate(){
-        for (int i=0; i < this.vlist.size(); i++){
-
-            Vertex start = this.vlist.get(i);
-            
-            // TODO:
-            // while degree of start and end is less than 2 and the edge does not intersect
-            while (start.getDegree() < 2){
-                int temp = randomGenerator.nextInt(size);
-                Vertex end = this.vlist.get(temp);
-                if (end != start){
-                    start.visit();
-                    Edge edge = new Edge(start, end);
-                    this.elist.add(edge);
-                    break;
-                }
+    // TODO: allow one intersection maybe?
+    /*checks if the given edge intersects any existing edge in the grid.*/
+    public static boolean intersectsAnyEdge(Edge potentialEdge){
+        for (Edge edge : this.elist){
+            if intersects(potentialEdge, edge){
+                return true
             }
+        return false
         }
     }
+
 
     public static class Edge{
         private Vertex start;
