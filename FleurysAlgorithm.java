@@ -38,7 +38,7 @@ public class FleurysAlgorithm{
         }      
     }
 
-    public void generate(){
+    public void generatePath(){
         for (int i=0; i < this.vlist.size(); i++){
 
             Vertex start = this.vlist.get(i);
