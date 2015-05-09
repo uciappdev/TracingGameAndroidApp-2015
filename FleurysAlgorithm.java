@@ -1,6 +1,10 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+/*
+TODO: 
+-- intersects() still does not account for overlapping lines. e.g. 0,0 -> 1, 1 and 0, 0 -> 2, 2
+*/
 
 public class FleurysAlgorithm {
     private final int SEARCHLIMIT = 300;
@@ -11,7 +15,7 @@ public class FleurysAlgorithm {
     public ArrayList<Vertex> completeCircuit;
     private boolean pathIsGenerated;
 
-
+    
     public FleurysAlgorithm(int size) {
         this.size = size;
         this.vlist = new ArrayList<Vertex>();
@@ -27,7 +31,7 @@ public class FleurysAlgorithm {
         System.out.println(vlist);
     }
 
-
+    
     /*Given size, creates a grid of vertices with dimensions size x size*/
     private void buildGrid(int size) {
         // create all vertices.
@@ -39,7 +43,7 @@ public class FleurysAlgorithm {
         }      
     }
     
-
+    
     /*Generates a eulerian path in the grid.
      * @returns: boolean representing whether or not generatePath is successful.*/
     private boolean generatePath() {
@@ -78,6 +82,7 @@ public class FleurysAlgorithm {
         return false;
     }
 
+    
     /*Actually implements a valid edge. (adds it to this.elist)*/
     private void createEdge(Vertex start, Vertex end, Edge potentialEdge) {
         start.visit();
@@ -86,6 +91,7 @@ public class FleurysAlgorithm {
         this.completeCircuit.add(end);        
     }
 
+    
     /*Given two edges, returns whether or not the two edges intersect.*/
     public static boolean intersects(Edge a, Edge b) {
         double ax1 = a.getStart().getX(),
@@ -95,7 +101,7 @@ public class FleurysAlgorithm {
             bx1 = b.getStart().getX(),
             by1 = b.getStart().getY(),
             bx2 = b.getEnd().getX(),
-            by2 = b.getEnd().getY(); 
+            by2 = b.getEnd().getY();     
 
         double aSlope;
         double aLeftAxisIntersect;
@@ -107,7 +113,8 @@ public class FleurysAlgorithm {
 
         double xIntercept, yIntercept;
 
-        if (bottomSlopeFormulaA == bottomSlopeFormulaB) {
+        if ((bottomSlopeFormulaA == 0) &&
+            (bottomSlopeFormulaA == bottomSlopeFormulaB)) {
             return false; // if both edges are vertical.
         }
         // edge a is vertical.
@@ -168,12 +175,12 @@ public class FleurysAlgorithm {
 
     }
     
-
+    
     private static boolean isBetween(double x, double a, double b) {
         return (a<x && x<b) || (b<x && x<a);
     }
 
-
+    
     /*checks if the given edge intersects any existing edge in the grid.*/
     private boolean intersectsAnyEdge(Edge potentialEdge) {
         for (Edge edge : this.elist) {
@@ -184,7 +191,7 @@ public class FleurysAlgorithm {
         return false;
     }
 
-
+    
     public static class Edge {
         private Vertex start;
         private Vertex end;
@@ -203,7 +210,7 @@ public class FleurysAlgorithm {
         }
     }
 
-
+    
     public static class Vertex {
         private int x;
         private int y;
@@ -235,7 +242,6 @@ public class FleurysAlgorithm {
             return this.degree;
         }
     }
-
 
     // currently not used.
     private void makeLines(ArrayList<Vertex> current) {
