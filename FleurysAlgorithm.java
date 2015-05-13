@@ -28,7 +28,6 @@ public class FleurysAlgorithm {
         while (!pathIsGenerated) {
             this.pathIsGenerated = generatePath();
         }
-        System.out.println(vlist);
     }
 
     
