@@ -1,3 +1,3 @@
-# ThePointThingUI
+# The Tracing App Thing!
 
-A temporary repository for the UI system of an Android game that is yet to be named!
+The main repository for the Tracing App produced by the UCI AppDev team for Spring 2015.
