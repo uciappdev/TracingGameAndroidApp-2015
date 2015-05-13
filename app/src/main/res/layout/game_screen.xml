@@ -4,23 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1"
-    android:background="@drawable/notepad_page"
+    android:background="@drawable/stars"
+    android:scaleType="centerCrop"
     android:focusableInTouchMode="false">
 
     <ImageButton
-        android:layout_width="44dp"
-        android:layout_height="44dp"
+        android:layout_width="42.75dp"
+        android:layout_height="45dp"
         android:onClick="goHome"
         android:id="@+id/home"
-        android:src="@drawable/home_button"
+        android:src="@drawable/new_button2"
         android:contentDescription="Home button" />
 
     <Chronometer
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/chronometer"
+        android:id="@+id/Timer"
         android:textSize="@dimen/abc_action_bar_progress_bar_size"
-        android:paddingLeft="150dp"
-        android:paddingRight="100dp" />
+        android:paddingLeft="110dp"
+        android:paddingRight="100dp"
+        android:textColor="#FFFFFFFF"
+        android:enabled="true" />
 
 </LinearLayout>
