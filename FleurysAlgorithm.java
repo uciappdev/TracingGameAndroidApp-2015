@@ -1,10 +1,7 @@
 import java.util.ArrayList;
 import java.util.Random;
 
-/*
-TODO: 
--- intersects() still does not account for overlapping lines. e.g. 0,0 -> 1, 1 and 0, 0 -> 2, 2
-*/
+
 
 public class FleurysAlgorithm {
     private final int SEARCHLIMIT = 300;
